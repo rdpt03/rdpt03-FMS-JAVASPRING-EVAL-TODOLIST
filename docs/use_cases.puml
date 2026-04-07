@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+left to right direction
+
+' ----actors----
+:Utilisateur connecté: as user
+:Invité: as guest
+
+' ----Tasks for guest----
+    (Consulter taches fictives) as TASK1
+    (Filtrer etat ToDo InProgress Done) as TASK2
+
+' ----Tasks for user----
+    (Consulter taches) as TASK4
+    (ajouter, modifier, supprimer et consulter ses tâches) as TASK5
+    (filtrer ou trier les tâches par catégorie ou par date) as TASK6
+    (Changer etat tache) as TASK7
+
+guest -- TASK1
+guest -- TASK2
+
+
+user -- TASK4
+user -- TASK5
+user -- TASK6
+user -- TASK7
+
+
+
+
+@enduml
+
+
+
+
