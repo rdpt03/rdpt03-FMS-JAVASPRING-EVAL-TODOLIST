@@ -1,0 +1,43 @@
+@startuml
+autonumber
+
+actor "Utilisateur connecté" as User
+
+participant "TaskController" as Controller
+participant "TaskService" as Service
+participant "TaskRepository" as Repository
+database "Database" as DB
+
+' --- Create Task Flow ---
+'go
+
+User -> Controller : POST /tasks (task data)
+activate User
+
+activate Controller
+Controller -> Service : createTask(taskDTO)
+
+activate Service
+Service -> Repository : save(task)
+
+
+activate Repository
+Repository -> DB : INSERT task
+activate DB
+
+' back
+DB -> Repository : OK
+deactivate DB
+
+
+Repository -> Service : task saved
+deactivate Repository
+
+
+Service -> Controller : task created response
+deactivate Service
+
+Controller -> User : 201 Created
+deactivate Controller
+deactivate User
+@enduml
