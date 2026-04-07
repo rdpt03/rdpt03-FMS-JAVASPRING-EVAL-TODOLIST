@@ -1,27 +1,34 @@
 @startuml
-'https://plantuml.com/class-diagram
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+class Task {
+    - id : Long
+    - name : String
+    - description : String
+    - date : DateTime
+    - state : TASK_STATE
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+class Category {
+    - id : Long
+    - name : String
 }
+
+enum TASK_STATE {
+    TO_DO
+    IN_PROGRESS
+    DONE
+}
+
+' Relation
+Task "0..*" -- "1" User
+Task "0..*" -- "0..1" Category
+
+' External class managed by framework
+class User <<external>>
+
+note right of User
+User est géré par le framework (Spring Security).
+Non implémenté dans le projet.
+end note
 
 @enduml
