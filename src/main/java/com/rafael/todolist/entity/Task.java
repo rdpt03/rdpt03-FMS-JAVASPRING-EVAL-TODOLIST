@@ -37,6 +37,11 @@ public class Task {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @Getter
+    @ManyToOne(fetch = FetchType.LAZY) // o lado “muitos-para-um”
+    @JoinColumn(name = "user_id") // coluna FK na tabela Task
+    private User user;
+
 
     public Task(long id, String name, String description, LocalDateTime date) {
         this.id = id;
@@ -48,5 +53,10 @@ public class Task {
     public void setCategory(Category category) {
         this.category = category;
         category.getTasks().add(this);
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+        user.getTasks().add(this);
     }
 }
