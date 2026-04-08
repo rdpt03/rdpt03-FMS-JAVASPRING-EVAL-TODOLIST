@@ -4,7 +4,7 @@ class Task {
     - id : Long
     - name : String
     - description : String
-    - date : DateTime
+    - date : LocalDateTime
     - state : TASK_STATE
 }
 
