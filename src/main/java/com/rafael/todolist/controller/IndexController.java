@@ -43,12 +43,9 @@ public class IndexController {
             User fakeUser = new User();
             fakeUser.setUsername("Invité");
 
-            //create fake tasks
-            Category rangement = categoryRepo.findById(1L).orElseThrow();
-            Category cuisine = categoryRepo.findById(2L).orElseThrow();
-            Category travaux = categoryRepo.findById(3L).orElseThrow();
-
+            //generate fake tasks
             List<Task> fakeTasks = generateFakeTasks();
+
             //todo get rid of it
             model.addAttribute("user", fakeUser);
             model.addAttribute("tasks", fakeTasks);
@@ -61,6 +58,11 @@ public class IndexController {
     }
 
     private List<Task> generateFakeTasks(){
+        //create fake tasks
+        Category rangement = categoryRepo.findById(1L).orElseThrow();
+        Category cuisine = categoryRepo.findById(2L).orElseThrow();
+        Category travaux = categoryRepo.findById(3L).orElseThrow();
+
         return List.of(
 
                 new Task("Ranger la chambre",
