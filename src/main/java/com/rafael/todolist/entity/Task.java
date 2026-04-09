@@ -53,6 +53,16 @@ public class Task {
         this.date = date;
     }
 
+    //for demo
+    public Task(String name, String description, LocalDateTime date, TaskState taskState, Category categ) {
+        this.id = 0L;
+        this.name = name;
+        this.description = description;
+        this.date = date;
+        this.state = taskState;
+        this.category = categ;
+    }
+
     public void setCategory(Category category) {
         this.category = category;
         category.getTasks().add(this);
