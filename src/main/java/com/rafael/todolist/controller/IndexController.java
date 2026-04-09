@@ -5,13 +5,14 @@ import com.rafael.todolist.entity.Task;
 import com.rafael.todolist.entity.TaskState;
 import com.rafael.todolist.entity.User;
 import com.rafael.todolist.repository.CategoryRepository;
+import com.rafael.todolist.repository.TaskRepository;
 import com.rafael.todolist.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,6 +23,9 @@ public class IndexController {
     private UserRepository userRepo;
     @Autowired
     private CategoryRepository categoryRepo;
+    @Autowired
+    private TaskRepository taskRepo;
+
 
     @GetMapping("/index")
     public String home(Authentication auth, Model model) {
@@ -56,6 +60,27 @@ public class IndexController {
         );
         return "index";
     }
+
+
+    @PostMapping("/task/{id}/state")
+    @ResponseBody
+    public String updateTaskState(@PathVariable Long id, @RequestParam TaskState state, Authentication auth) {
+        //get logged user
+        String username = auth.getName();
+        User user = userRepo.findByUsername(username).orElseThrow();
+
+        //get task
+        Task task = taskRepo.findById(id)
+                .filter(t -> t.getUser().getId().equals(user.getId())) // garante que pertence ao user
+                .orElseThrow(() -> new RuntimeException("Tâche non trouvée ou accès refusé"));
+
+        //update status
+        task.setState(state);
+        taskRepo.save(task);
+
+        return "OK";
+    }
+
 
     private List<Task> generateFakeTasks(){
         //create fake tasks
