@@ -38,9 +38,12 @@ public class Task {
     private Category category;
 
     @Getter
-    @ManyToOne(fetch = FetchType.LAZY) // o lado “muitos-para-um”
-    @JoinColumn(name = "user_id") // coluna FK na tabela Task
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
+
+
+    public Task() {}
 
 
     public Task(long id, String name, String description, LocalDateTime date) {
