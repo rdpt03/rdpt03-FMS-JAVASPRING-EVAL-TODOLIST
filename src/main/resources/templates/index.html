@@ -18,6 +18,7 @@
             <th>Description</th>
             <th>Date</th>
             <th>Status</th>
+            <th>Category</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -33,6 +34,7 @@
                     <option th:selected="${task.state.name() == 'DONE'}">DONE</option>
                 </select>
             </td>
+            <td th:text="${task.category.name}"></td>
             <td>
                 <button class="btn btn-sm btn-primary">
                     <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
