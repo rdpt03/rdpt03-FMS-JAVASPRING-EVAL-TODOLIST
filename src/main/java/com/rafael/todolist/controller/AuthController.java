@@ -2,17 +2,15 @@ package com.rafael.todolist.controller;
 
 import com.rafael.todolist.entity.User;
 import com.rafael.todolist.repository.UserRepository;
-import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.security.autoconfigure.SecurityProperties;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+
 
 @Controller
 public class AuthController {
