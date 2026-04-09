@@ -2,7 +2,7 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="layout.html">
+      layout:decorate="${isLogged ? 'layout' : 'layout-guest'}">
 
 <div layout:fragment="content">
 
@@ -22,7 +22,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="task : ${user.tasks}">
+        <tr th:each="task : ${tasks}">
             <td th:text="${task.name}"></td>
             <td th:text="${task.description}"></td>
             <td th:text="${task.date}"></td>
@@ -58,7 +58,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
-    <!-- Custom DataTable estilo Windows 11 -->
+    <!-- Custom DataTable style Windows 11 -->
     <style>
         body {
             background-color: #1e1e2f;
