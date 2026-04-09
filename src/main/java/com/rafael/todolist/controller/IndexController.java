@@ -36,7 +36,6 @@ public class IndexController {
             model.addAttribute("user", user);
             model.addAttribute("tasks", user.getTasks());
             model.addAttribute("title", "Accueil - TDL");
-            return "index";
         }
         //non connected user
         else{
@@ -87,7 +86,7 @@ public class IndexController {
                             TaskState.IN_PROGRESS,
                             travaux)
             );
-
+            //todo get rid of it
             model.addAttribute("user", fakeUser);
             model.addAttribute("tasks", fakeTasks);
             model.addAttribute("title", "Accueil - TDL - Deconnecté");
