@@ -48,44 +48,7 @@ public class IndexController {
             Category cuisine = categoryRepo.findById(2L).orElseThrow();
             Category travaux = categoryRepo.findById(3L).orElseThrow();
 
-            List<Task> fakeTasks = List.of(
-
-                    new Task("Ranger la chambre",
-                            "Organiser les vêtements et nettoyer le sol",
-                            LocalDateTime.now().plusDays(1),
-                            TaskState.TO_DO,
-                            rangement),
-
-                    new Task("Nettoyer le bureau",
-                            "Enlever la poussière et trier les papiers",
-                            LocalDateTime.now().plusDays(2),
-                            TaskState.IN_PROGRESS,
-                            rangement),
-
-                    new Task("Préparer le dîner",
-                            "Faire des pâtes avec sauce tomate",
-                            LocalDateTime.now().plusHours(5),
-                            TaskState.TO_DO,
-                            cuisine),
-
-                    new Task("Faire les courses",
-                            "Acheter légumes, viande et lait",
-                            LocalDateTime.now().plusDays(1),
-                            TaskState.DONE,
-                            cuisine),
-
-                    new Task("Peindre le mur",
-                            "Repeindre le salon en blanc",
-                            LocalDateTime.now().plusDays(3),
-                            TaskState.TO_DO,
-                            travaux),
-
-                    new Task("Réparer la porte",
-                            "Changer la poignée cassée",
-                            LocalDateTime.now().plusDays(4),
-                            TaskState.IN_PROGRESS,
-                            travaux)
-            );
+            List<Task> fakeTasks = generateFakeTasks();
             //todo get rid of it
             model.addAttribute("user", fakeUser);
             model.addAttribute("tasks", fakeTasks);
@@ -95,5 +58,46 @@ public class IndexController {
                 auth != null && auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken)
         );
         return "index";
+    }
+
+    private List<Task> generateFakeTasks(){
+        return List.of(
+
+                new Task("Ranger la chambre",
+                        "Organiser les vêtements et nettoyer le sol",
+                        LocalDateTime.now().plusDays(1),
+                        TaskState.TO_DO,
+                        rangement),
+
+                new Task("Nettoyer le bureau",
+                        "Enlever la poussière et trier les papiers",
+                        LocalDateTime.now().plusDays(2),
+                        TaskState.IN_PROGRESS,
+                        rangement),
+
+                new Task("Préparer le dîner",
+                        "Faire des pâtes avec sauce tomate",
+                        LocalDateTime.now().plusHours(5),
+                        TaskState.TO_DO,
+                        cuisine),
+
+                new Task("Faire les courses",
+                        "Acheter légumes, viande et lait",
+                        LocalDateTime.now().plusDays(1),
+                        TaskState.DONE,
+                        cuisine),
+
+                new Task("Peindre le mur",
+                        "Repeindre le salon en blanc",
+                        LocalDateTime.now().plusDays(3),
+                        TaskState.TO_DO,
+                        travaux),
+
+                new Task("Réparer la porte",
+                        "Changer la poignée cassée",
+                        LocalDateTime.now().plusDays(4),
+                        TaskState.IN_PROGRESS,
+                        travaux)
+        );
     }
 }
