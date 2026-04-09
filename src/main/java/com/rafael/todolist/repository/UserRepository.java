@@ -1,7 +1,7 @@
 package com.rafael.todolist.repository;
 
 import com.rafael.todolist.entity.User;
-import org.springframework.boot.security.autoconfigure.SecurityProperties;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
