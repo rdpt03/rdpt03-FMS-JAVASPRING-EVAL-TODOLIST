@@ -25,6 +25,7 @@ public class Category {
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Task> tasks;
 
+    public Category() {}
 
     public Category( String name) {
         this.name = name;
