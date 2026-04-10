@@ -39,8 +39,8 @@ public class TaskController {
         //save it
         taskRepo.save(task);
 
-        //
-        return "/task/form";
+        //redirect
+        return "redirect:/index";
     }
 
     @GetMapping("/task/create")
