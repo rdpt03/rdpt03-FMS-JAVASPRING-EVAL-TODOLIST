@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -42,13 +43,19 @@ public class TaskController {
      * @throws UsernameNotFoundException if the user is not found
      */
     @PostMapping("/task/create")
-    public String createTaskSubmit(@ModelAttribute Task task, Authentication auth) {
+    public String createTaskSubmit(@ModelAttribute Task task, @RequestParam Long categoryId, Authentication auth) {
         //get atual user
         User user = userRepo.findByUsername(auth.getName())
                 .orElseThrow(() -> new UsernameNotFoundException("Erreur user non trouvé!"));
 
-        // associate user totask
+        // associate user to task
         task.setUser(user);
+
+        //associate category to task
+        Category category = categoryRepo.findById(categoryId)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+
+        task.setCategory(category);
 
         //save it
         taskRepo.save(task);
