@@ -11,7 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-
+/**
+ * Controller responsible for user authentication.
+ * Handles user registration and login page rendering.
+ */
 @Controller
 public class AuthController {
 
@@ -21,7 +24,17 @@ public class AuthController {
     @Autowired
     private PasswordEncoder encoder;
 
-    //---------------------REGISTER--------------------------
+    /**
+     * Registers a new user.
+     * <p>
+     * Checks if the username already exists, encodes the password,
+     * and saves the user in the database.
+     *
+     * @param username the username provided by the user
+     * @param password the raw password to be encoded
+     * @param model    the Spring MVC model
+     * @return redirect to login page if success, otherwise returns register view with error
+     */
     @PostMapping("/register")
     public String registerUser(@RequestParam String username,
                                @RequestParam String password,
@@ -40,12 +53,21 @@ public class AuthController {
         return "redirect:/login";
     }
 
+    /**
+     * Displays the registration page.
+     *
+     * @return the register view
+     */
     @GetMapping("/register")
     public String registerPage() {
         return "register"; // Thymeleaf template
     }
 
-    //-----------------------login--------------------------
+    /**
+     * Displays the login page.
+     *
+     * @return the login view
+     */
     @GetMapping("/login")
     public String loginPage() {
         return "login"; // Thymeleaf template
