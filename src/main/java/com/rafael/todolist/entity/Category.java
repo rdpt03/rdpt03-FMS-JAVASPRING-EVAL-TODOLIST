@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,7 +24,7 @@ public class Category {
     @Getter
     @Setter
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private List<Task> tasks;
+    private List<Task> tasks = new ArrayList<>();
 
     public Category() {}
 
