@@ -24,11 +24,10 @@ Task "0..*" -- "1" User
 Task "0..*" -- "0..1" Category
 
 ' External class managed by framework
-class User <<external>>
-
-note right of User
-User est géré par le framework (Spring Security).
-Non implémenté dans le projet.
-end note
+class User {
+    - id : Long
+    - username : String
+    - password : String
+}
 
 @enduml
