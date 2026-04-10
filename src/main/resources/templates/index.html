@@ -37,14 +37,8 @@
             </td>
             <td th:text="${task.category.name}"></td>
             <td>
-                <button class="btn btn-sm btn-primary">
-                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 19.25L9 18.25L18.2929 8.95711C18.6834 8.56658 18.6834 7.93342 18.2929 7.54289L16.4571 5.70711C16.0666 5.31658 15.4334 5.31658 15.0429 5.70711L5.75 15L4.75 19.25Z"></path>
-                        <path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.25 19.25H13.75"></path>
-                    </svg>
-
-                </button>
-                <button class="btn btn-sm btn-danger">
+                <!--Delete button-->
+                <button class="btn btn-sm btn-danger" th:if="${isLogged}">
                     <?xml version="1.0" encoding="UTF-8"?>
                     <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#ffffff" stroke-width="1.5">
                         <path d="M20 9L18.005 20.3463C17.8369 21.3026 17.0062 22 16.0353 22H7.96474C6.99379 22 6.1631 21.3026 5.99496 20.3463L4 9" fill="#ffffff"></path>
