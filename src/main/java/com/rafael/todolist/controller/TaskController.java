@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+/**
+ * Controller responsible for task creation.
+ * Handles rendering the task form and submitting new tasks.
+ */
 @Controller
 public class TaskController {
     @Autowired
@@ -26,7 +30,17 @@ public class TaskController {
     @Autowired
     private TaskRepository taskRepo;
 
-    //---------------------REGISTER--------------------------
+    /**
+     * Handles the submission of a new task.
+     * <p>
+     * Associates the task with the currently authenticated user
+     * and saves it in the database.
+     *
+     * @param task the task object populated from the form
+     * @param auth the current authenticated user
+     * @return the task creation form view
+     * @throws UsernameNotFoundException if the user is not found
+     */
     @PostMapping("/task/create")
     public String createTaskSubmit(@ModelAttribute Task task, Authentication auth) {
         //get atual user
@@ -43,6 +57,14 @@ public class TaskController {
         return "redirect:/index";
     }
 
+    /**
+     * Displays the task creation form.
+     * <p>
+     * Loads all available categories to populate the form.
+     *
+     * @param model the Spring MVC model
+     * @return the task creation form view
+     */
     @GetMapping("/task/create")
     public String creaTaskRender(Model model){
         //get available categs
