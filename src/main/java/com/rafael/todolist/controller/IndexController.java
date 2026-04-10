@@ -74,6 +74,12 @@ public class IndexController {
         return "index";
     }
 
+
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/index";
+    }
+
     /**
      * Updates the state of a task.
      * <p>
