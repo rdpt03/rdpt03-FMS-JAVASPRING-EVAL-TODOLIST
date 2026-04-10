@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Controller responsible for handling the home page and task state updates.
+ * It manages both authenticated and non-authenticated users.
+ */
 @Controller
 public class IndexController {
     @Autowired
@@ -26,7 +30,16 @@ public class IndexController {
     @Autowired
     private TaskRepository taskRepo;
 
-
+    /**
+     * Displays the home page.
+     * <p>
+     * If the user is authenticated, their tasks are loaded.
+     * Otherwise, a fake user with demo tasks is displayed.
+     *
+     * @param auth  the current authentication object
+     * @param model the Spring MVC model
+     * @return the index view name
+     */
     @GetMapping("/index")
     public String home(Authentication auth, Model model) {
         //check id user is connected
@@ -39,7 +52,7 @@ public class IndexController {
             //send to front
             model.addAttribute("user", user);
             model.addAttribute("tasks", user.getTasks());
-            model.addAttribute("title", "Accueil - TDL");
+            model.addAttribute("title", "Accueil - TDA");
         }
         //non connected user
         else{
@@ -53,7 +66,7 @@ public class IndexController {
             //todo get rid of it
             model.addAttribute("user", fakeUser);
             model.addAttribute("tasks", fakeTasks);
-            model.addAttribute("title", "Accueil - TDL - Deconnecté");
+            model.addAttribute("title", "Accueil - TDA - Deconnecté");
         }
         model.addAttribute("isLogged",
                 auth != null && auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken)
@@ -61,7 +74,18 @@ public class IndexController {
         return "index";
     }
 
-
+    /**
+     * Updates the state of a task.
+     * <p>
+     * Ensures that the task belongs to the authenticated user
+     * before applying the update.
+     *
+     * @param id    the task ID
+     * @param state the new task state
+     * @param auth  the current authenticated user
+     * @return "OK" if the update is successful
+     * @throws RuntimeException if the task is not found or access is denied
+     */
     @PostMapping("/task/{id}/state")
     @ResponseBody
     public String updateTaskState(@PathVariable Long id, @RequestParam TaskState state, Authentication auth) {
@@ -81,7 +105,11 @@ public class IndexController {
         return "OK";
     }
 
-
+    /**
+     * Generates a list of fake tasks for non-authenticated users.
+     *
+     * @return a list of demo tasks
+     */
     private List<Task> generateFakeTasks(){
         //create fake tasks
         Category rangement = categoryRepo.findById(1L).orElseThrow();
