@@ -7,7 +7,7 @@
 <body class="bg-dark text-light d-flex justify-content-center align-items-center vh-100">
 
 <div class="card p-4 shadow-lg" style="width: 350px; background-color: #2a2a3a;">
-    <h2 class="text-center mb-3">Se Connecter</h2>
+    <h2 class="text-center mb-3" style="color: white;">Se Connecter</h2>
 
     <form th:action="@{/login}" method="post">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
