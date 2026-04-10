@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "tasks")
@@ -65,7 +66,12 @@ public class Task {
 
     public void setCategory(Category category) {
         this.category = category;
-        category.getTasks().add(this);
+        if (category != null) {
+            if (category.getTasks() == null) {
+                category.setTasks(new ArrayList<>());
+            }
+            category.getTasks().add(this);
+        }
     }
 
     public void setUser(User user) {
